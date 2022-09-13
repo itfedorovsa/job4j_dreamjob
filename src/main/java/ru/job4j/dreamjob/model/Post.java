@@ -1,18 +1,18 @@
-package ru.job4j.dream.model;
+package ru.job4j.dreamjob.model;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class Candidate {
+public class Post {
     private int id;
     private String name;
     private String description;
     private LocalDateTime created;
 
-    public Candidate() {
+    public Post() {
     }
 
-    public Candidate(int id, String name, String description, LocalDateTime created) {
+    public Post(int id, String name, String description, LocalDateTime created) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -59,8 +59,9 @@ public class Candidate {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Candidate candidate = (Candidate) o;
-        return id == candidate.id && Objects.equals(name, candidate.name) && Objects.equals(description, candidate.description) && Objects.equals(created, candidate.created);
+        Post post = (Post) o;
+        return id == post.id && Objects.equals(name, post.name)
+                && Objects.equals(description, post.description) && Objects.equals(created, post.created);
     }
 
     @Override

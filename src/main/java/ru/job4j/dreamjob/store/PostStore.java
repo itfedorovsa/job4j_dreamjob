@@ -25,4 +25,8 @@ public class PostStore {
     public Collection<Post> findAll() {
         return posts.values();
     }
+
+    public void add(Post post) {
+        posts.putIfAbsent(5, post);
+    }
 }

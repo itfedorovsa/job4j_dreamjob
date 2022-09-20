@@ -24,6 +24,17 @@ public class PostStore {
         return INST;
     }
 
+    public Post findById(int id) {
+        return posts.get(id);
+    }
+
+    public void update(Post post) {
+        Post rsl = posts.get(post.getId());
+        rsl.setName(post.getName());
+        rsl.setDescription(post.getDescription());
+        rsl.setCreated(post.getCreated());
+    }
+
     public Collection<Post> findAll() {
         return posts.values();
     }

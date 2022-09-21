@@ -29,8 +29,17 @@ public class CandidateStore {
         return candidates.values();
     }
 
+    public Candidate findById(int id) {
+        return candidates.get(id);
+    }
+
     public void add(Candidate candidate) {
         candidate.setId(counter.incrementAndGet());
         candidates.putIfAbsent(candidate.getId(), candidate);
+    }
+
+    public void update(Candidate candidate) {
+        candidate.setCreated(LocalDateTime.now());
+        candidates.replace(candidate.getId(), candidate);
     }
 }

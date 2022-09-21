@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class CandidateStore {
     private static final CandidateStore CANDIDATE_INST = new CandidateStore();
 
-    private final AtomicInteger counter = new AtomicInteger(4);
+    private final AtomicInteger counter = new AtomicInteger(3);
 
     private final Map<Integer, Candidate> candidates = new ConcurrentHashMap<>();
 
@@ -30,7 +30,7 @@ public class CandidateStore {
     }
 
     public void add(Candidate candidate) {
-        candidate.setId(counter.getAndIncrement());
-        candidates.putIfAbsent(counter.get(), candidate);
+        candidate.setId(counter.incrementAndGet());
+        candidates.putIfAbsent(candidate.getId(), candidate);
     }
 }

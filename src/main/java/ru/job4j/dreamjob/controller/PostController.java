@@ -7,13 +7,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.job4j.dreamjob.model.Post;
+import ru.job4j.dreamjob.service.PostService;
 import ru.job4j.dreamjob.store.PostStore;
 
 import java.time.LocalDateTime;
 
 @Controller
 public class PostController {
-    private final PostStore store = PostStore.instOf();
+    private final PostStore store = PostService.getInst();
 
     @GetMapping("/posts")
     public String posts(Model model) {

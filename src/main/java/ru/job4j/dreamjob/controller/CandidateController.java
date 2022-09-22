@@ -30,7 +30,6 @@ public class CandidateController {
 
     @PostMapping("/createCandidate")
     public String createCandidate(@ModelAttribute Candidate candidate) {
-        candidate.setCreated(LocalDateTime.now());
         store.add(candidate);
         return "redirect:/candidates";
     }

@@ -29,7 +29,6 @@ public class PostController {
 
     @PostMapping("/createPost")
     public String createPost(@ModelAttribute Post post) {
-        post.setCreated(LocalDateTime.now());
         store.add(post);
 
         return "redirect:/posts";

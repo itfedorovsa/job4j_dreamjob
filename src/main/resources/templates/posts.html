@@ -43,6 +43,7 @@
                 <th scope="col">Vacancy Name</th>
                 <th scope="col">Description</th>
                 <th scope="col">Created</th>
+                <th scope="col">City</th>
             </tr>
             </thead>
             <tbody>
@@ -61,6 +62,7 @@
                     </span>
                 <td th:text="${post.description}" />
                 <td th:text="${post.created}" />
+                <td th:text="${cities.get(post.city.id).name}" />
                 </td>
             </tr>
             </tbody>

@@ -4,6 +4,7 @@ import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Repository;
 import ru.job4j.dreamjob.model.City;
 import ru.job4j.dreamjob.model.Post;
+import ru.job4j.dreamjob.service.CityService;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -37,6 +38,9 @@ public class PostStore {
     }
 
     public void add(Post post) {
+        int id = post.getCity().getId();
+        CityService s = new CityService();
+        post.setCity(new City(id, s.findById(id).getName()));
         post.setId(counter.incrementAndGet());
         posts.putIfAbsent(post.getId(), post);
     }

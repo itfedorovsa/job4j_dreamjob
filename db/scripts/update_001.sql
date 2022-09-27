@@ -6,3 +6,12 @@ CREATE TABLE post (
    visible boolean,
    city_id int
 );
+
+CREATE TABLE candidates (
+   id SERIAL PRIMARY KEY,
+   name varchar(255),
+   description varchar(255),
+   created timestamp without time zone,
+   visible boolean,
+   city_id int
+);

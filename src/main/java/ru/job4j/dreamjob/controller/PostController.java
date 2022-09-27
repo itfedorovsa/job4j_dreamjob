@@ -42,6 +42,8 @@ public class PostController {
 
     @PostMapping("/createPost")
     public String createPost(@ModelAttribute Post post) {
+        int id = post.getCity().getId();
+        post.setCity(new City(id, cityService.findById(id).getName()));
         postService.add(post);
         return "redirect:/posts";
     }

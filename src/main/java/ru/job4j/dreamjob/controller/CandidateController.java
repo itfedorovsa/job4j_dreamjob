@@ -15,7 +15,11 @@ import java.time.LocalDateTime;
 @ThreadSafe
 @Controller
 public class CandidateController {
-    private final CandidateService service = CandidateService.getInst();
+    private final CandidateService service;
+
+    public CandidateController(CandidateService service) {
+        this.service = service;
+    }
 
     @GetMapping("/candidates")
     public String candidates(Model model) {

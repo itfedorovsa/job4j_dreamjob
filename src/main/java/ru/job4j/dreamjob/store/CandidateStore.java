@@ -3,6 +3,7 @@ package ru.job4j.dreamjob.store;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Repository;
 import ru.job4j.dreamjob.model.Candidate;
+import ru.job4j.dreamjob.model.City;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -18,9 +19,9 @@ public class CandidateStore {
     private final Map<Integer, Candidate> candidates = new ConcurrentHashMap<>();
 
     private CandidateStore() {
-        candidates.put(1, new Candidate(1, "John", "desc1", LocalDateTime.now()));
-        candidates.put(2, new Candidate(2, "Jade", "desc2", LocalDateTime.now()));
-        candidates.put(3, new Candidate(3, "Jim", "desc3", LocalDateTime.now()));
+        candidates.put(1, new Candidate(1, "John", "desc1", LocalDateTime.now(), false, new City()));
+        candidates.put(2, new Candidate(2, "Jade", "desc2", LocalDateTime.now(), false, new City()));
+        candidates.put(3, new Candidate(3, "Jim", "desc3", LocalDateTime.now(), false, new City()));
     }
 
     public Collection<Candidate> findAll() {

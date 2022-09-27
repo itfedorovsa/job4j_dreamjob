@@ -43,6 +43,7 @@
                 <th scope="col">Candidate Name</th>
                 <th scope="col">Description</th>
                 <th scope="col">Created</th>
+                <th scope="col">City</th>
             </tr>
             </thead>
             <tbody>
@@ -53,9 +54,16 @@
                         <i class="fa fa-edit"></i>
                     </a>
                     <span th:text="${candidate.name}"></span>
-                </td>
+                    <span th:if="${candidate.visible}">
+                        <i class="fa fa-check-square-o"></i>
+                    </span>
+                    <span th:if="${!candidate.visible}">
+                        <i class="fa fa-square-o"></i>
+                    </span>
                 <td th:text="${candidate.description}" />
                 <td th:text="${candidate.created}" />
+                <td th:text="${candidate.city.name}" />
+                </td>
             </tr>
             </tbody>
         </table>

@@ -3,7 +3,6 @@ package ru.job4j.dreamjob.controller;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,6 +49,8 @@ public class PostController {
 
     @PostMapping("/updatePost")
     public String updatePost(@ModelAttribute Post post) {
+        int id = post.getCity().getId();
+        post.setCity(new City(id, cityService.findById(id).getName()));
         postService.update(post);
         return "redirect:/posts";
     }
@@ -57,6 +58,7 @@ public class PostController {
     @GetMapping("/formUpdatePost/{postId}")
     public String formUpdatePost(Model model, @PathVariable("postId") int id) {
         model.addAttribute("post", postService.findById(id));
+        model.addAttribute("cities", cityService.getAllCities());
         return "updatePost";
     }
 }

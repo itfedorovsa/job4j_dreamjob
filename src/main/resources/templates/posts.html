@@ -62,7 +62,7 @@
                     </span>
                 <td th:text="${post.description}" />
                 <td th:text="${post.created}" />
-                <td th:text="${cities.get(post.city.id).name}" />
+                <td th:text="${post.city.name}" />
                 </td>
             </tr>
             </tbody>

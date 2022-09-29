@@ -14,9 +14,10 @@ import java.util.List;
 @Repository
 public class CandidateDBStore {
     private final BasicDataSource pool;
-    private static final String INSERT = "INSERT INTO candidates(name, description, created, visible, city_id) VALUES (?, ?, ?, ?, ?)";
+    private static final String INSERT = "INSERT INTO candidates(name, description, created, visible, city_id, photo) VALUES (?, ?, ?, ?, ?, ?)";
     private static final String SELECT_ALL = "SELECT * FROM candidates";
-    private static final String UPDATE = "UPDATE candidates SET name = ?, description = ?, created = ?, visible = ?, city_id = ? WHERE id = ?";
+    private static final String UPDATE =
+            "UPDATE candidates SET name = ?, description = ?, created = ?, visible = ?, city_id = ?, photo = ? WHERE id = ?";
     private static final String SELECT_ID = "SELECT * FROM candidates WHERE id = ?";
     private static final Logger LOG = LoggerFactory.getLogger(CandidateDBStore.class.getName());
 
@@ -48,6 +49,7 @@ public class CandidateDBStore {
             ps.setTimestamp(3, Timestamp.valueOf(candidate.getCreated()));
             ps.setBoolean(4, candidate.isVisible());
             ps.setInt(5, candidate.getCity().getId());
+            ps.setBytes(6, candidate.getPhoto());
             ps.execute();
             try (ResultSet id = ps.getGeneratedKeys()) {
                 if (id.next()) {
@@ -68,7 +70,8 @@ public class CandidateDBStore {
             ps.setTimestamp(3, Timestamp.valueOf(candidate.getCreated()));
             ps.setBoolean(4, candidate.isVisible());
             ps.setInt(5, candidate.getCity().getId());
-            ps.setInt(6, candidate.getId());
+            ps.setBytes(6, candidate.getPhoto());
+            ps.setInt(7, candidate.getId());
             ps.execute();
         } catch (Exception e) {
             LOG.error("Exception in update()", e);
@@ -96,6 +99,7 @@ public class CandidateDBStore {
                 rslSet.getString("description"),
                 rslSet.getTimestamp("created").toLocalDateTime(),
                 rslSet.getBoolean("visible"),
-                new City(rslSet.getInt("city_id")));
+                new City(rslSet.getInt("city_id")),
+                rslSet.getBytes("photo"));
     }
 }

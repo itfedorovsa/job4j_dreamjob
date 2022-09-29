@@ -19,9 +19,9 @@ public class CandidateStore {
     private final Map<Integer, Candidate> candidates = new ConcurrentHashMap<>();
 
     private CandidateStore() {
-        candidates.put(1, new Candidate(1, "John", "desc1", LocalDateTime.now(), false, new City()));
-        candidates.put(2, new Candidate(2, "Jade", "desc2", LocalDateTime.now(), false, new City()));
-        candidates.put(3, new Candidate(3, "Jim", "desc3", LocalDateTime.now(), false, new City()));
+        candidates.put(1, new Candidate(1, "John", "desc1", LocalDateTime.now(), false, new City(), null));
+        candidates.put(2, new Candidate(2, "Jade", "desc2", LocalDateTime.now(), false, new City(), null));
+        candidates.put(3, new Candidate(3, "Jim", "desc3", LocalDateTime.now(), false, new City(), null));
     }
 
     public Collection<Candidate> findAll() {

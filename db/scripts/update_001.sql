@@ -16,3 +16,10 @@ CREATE TABLE IF NOT EXISTS candidates (
    city_id INT,
    photo BYTEA
 );
+
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255),
+  email VARCHAR(255) UNIQUE,
+  password VARCHAR(255)T
+);

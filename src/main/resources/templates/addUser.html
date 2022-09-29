@@ -38,24 +38,18 @@
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                New vacancy.
+                Sign up.
             </div>
             <div class="card-body">
-                <form th:action="@{/createPost}" method="POST">
+                <form th:action="@{/registration}" method="POST">
                     <input type="hidden" name="id" value="0"/>
                     <div class="form-group">
-                        <label for="name">Vacancy Name</label>
+                        <label for="name">Name</label>
                         <input type="text" class="form-control" name="name" id="name">
-                        <label for="name">Vacancy Description</label>
-                        <input type="text" class="form-control" name="description" id="description">
-                        <label for="city.id">City</label>
-                        <select class="form-control" id="city.id" name="city.id">
-                            <option th:each="city : ${cities}" th:value="${city.id}" th:text="${city.name}"></option>
-                        </select>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" name="visible" class="form-check-input" id="visible">
-                        <label class="form-check-label" for="visible">Publish</label>
+                        <label for="name">Email</label>
+                        <input type="text" class="form-control" name="email" id="email">
+                        <label for="name">Password</label>
+                        <input type="text" class="form-control" name="password" id="password">
                     </div>
                     <button type="submit" class="btn btn-primary">Save</button>
                 </form>

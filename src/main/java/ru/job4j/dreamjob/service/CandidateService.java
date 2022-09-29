@@ -35,7 +35,7 @@ public class CandidateService {
                         cityService.findById(post.getCity().getId())
                 )
         );
-        return store.findAll();
+        return candidates;
     }
 
     public void add(Candidate candidate) {

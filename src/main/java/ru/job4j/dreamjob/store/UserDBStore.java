@@ -3,8 +3,8 @@ package ru.job4j.dreamjob.store;
 import net.jcip.annotations.ThreadSafe;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.postgresql.util.PSQLException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Repository;
 import ru.job4j.dreamjob.model.User;
 
@@ -21,7 +21,7 @@ public class UserDBStore {
     private static final String SELECT_ALL = "SELECT * FROM users";
     private static final String UPDATE = "UPDATE users SET name = ?, password = ? WHERE email = ?";
     private static final String SELECT_EMAIL = "SELECT * FROM users WHERE email = ?";
-    private static final Logger LOG = LoggerFactory.getLogger(UserDBStore.class.getName());
+    private static final Logger LOG = LogManager.getLogger(UserDBStore.class.getName());
 
     public UserDBStore(BasicDataSource pool) {
         this.pool = pool;

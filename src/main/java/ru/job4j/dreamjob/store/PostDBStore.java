@@ -2,8 +2,8 @@ package ru.job4j.dreamjob.store;
 
 import net.jcip.annotations.ThreadSafe;
 import org.apache.commons.dbcp2.BasicDataSource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Repository;
 import ru.job4j.dreamjob.model.City;
 import ru.job4j.dreamjob.model.Post;
@@ -20,7 +20,7 @@ public class PostDBStore {
     private static final String SELECT_ALL = "SELECT * FROM post";
     private static final String UPDATE = "UPDATE post SET name = ?, description = ?, created = ?, visible = ?, city_id = ? WHERE id = ?";
     private static final String SELECT_ID = "SELECT * FROM post WHERE id = ?";
-    private static final Logger LOG = LoggerFactory.getLogger(PostDBStore.class.getName());
+    private static final Logger LOG = LogManager.getLogger(PostDBStore.class.getName());
 
     public PostDBStore(BasicDataSource pool) {
         this.pool = pool;

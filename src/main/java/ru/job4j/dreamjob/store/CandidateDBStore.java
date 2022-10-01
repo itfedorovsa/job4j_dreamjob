@@ -2,11 +2,11 @@ package ru.job4j.dreamjob.store;
 
 import net.jcip.annotations.ThreadSafe;
 import org.apache.commons.dbcp2.BasicDataSource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import ru.job4j.dreamjob.model.Candidate;
 import ru.job4j.dreamjob.model.City;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class CandidateDBStore {
     private static final String UPDATE =
             "UPDATE candidates SET name = ?, description = ?, created = ?, visible = ?, city_id = ?, photo = ? WHERE id = ?";
     private static final String SELECT_ID = "SELECT * FROM candidates WHERE id = ?";
-    private static final Logger LOG = LoggerFactory.getLogger(CandidateDBStore.class.getName());
+    private static final Logger LOG = LogManager.getLogger(CandidateDBStore.class.getName());
 
     public CandidateDBStore(BasicDataSource pool) {
         this.pool = pool;

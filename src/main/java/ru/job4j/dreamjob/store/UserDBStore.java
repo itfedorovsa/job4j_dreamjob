@@ -28,6 +28,7 @@ public class UserDBStore {
     }
 
     public Optional<User> add(User user) {
+        Optional<User> rsl = Optional.empty();
         try (Connection cn = pool.getConnection();
              PreparedStatement ps =  cn.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, user.getName());
@@ -39,14 +40,15 @@ public class UserDBStore {
                     user.setId(id.getInt(1));
                 }
             }
+            rsl = Optional.of(user);
         } catch (PSQLException e) {
             if (e.getMessage().contains("ERROR: duplicate key value violates unique constraint \"users_email_key\"")) {
-                return Optional.empty();
+                return rsl;
             }
         } catch (Exception e) {
             LOG.error("Exception in add()", e);
         }
-        return Optional.ofNullable(user);
+        return rsl;
     }
 
     public void update(User user) {
@@ -61,20 +63,22 @@ public class UserDBStore {
         }
     }
 
-    public User findByEmail(String email) {
+    public Optional<User> findByEmail(String email) {
+        Optional<User> rsl = Optional.empty();
         try (Connection cn = pool.getConnection();
              PreparedStatement ps =  cn.prepareStatement(SELECT_EMAIL)
         ) {
             ps.setString(1, email);
             try (ResultSet it = ps.executeQuery()) {
                 if (it.next()) {
-                    return newUser(it);
+                    rsl = Optional.of(newUser(it));
+                    return rsl;
                 }
             }
         } catch (Exception e) {
             LOG.error("Exception in findByEmail()", e);
         }
-        return null;
+        return rsl;
     }
 
     public List<User> findAll() {

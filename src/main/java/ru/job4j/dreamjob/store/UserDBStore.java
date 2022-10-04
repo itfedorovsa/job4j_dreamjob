@@ -20,6 +20,7 @@ public class UserDBStore {
     private static final String SELECT_ALL = "SELECT * FROM users";
     private static final String UPDATE = "UPDATE users SET name = ?, password = ? WHERE email = ?";
     private static final String SELECT_EMAIL = "SELECT * FROM users WHERE email = ?";
+    private static final String SELECT_EMAIL_PASSWORD = "SELECT * FROM users WHERE email = ? AND password = ?";
     private static final Logger LOG = LogManager.getLogger(UserDBStore.class.getName());
 
     public UserDBStore(BasicDataSource pool) {
@@ -67,7 +68,25 @@ public class UserDBStore {
             try (ResultSet it = ps.executeQuery()) {
                 if (it.next()) {
                     rsl = Optional.of(newUser(it));
-                    return rsl;
+                }
+            }
+        } catch (Exception e) {
+            LOG.error("Exception in findByEmail()", e);
+        }
+        return rsl;
+    }
+
+    public Optional<User> findUserByEmailAndPwd(String email, String password) {
+        Optional<User> rsl = Optional.empty();
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps =  cn.prepareStatement(SELECT_EMAIL_PASSWORD)
+        ) {
+            ps.setString(1, email);
+            ps.setString(2, password);
+            try (ResultSet it = ps.executeQuery()) {
+                if (it.next()) {
+                    rsl = Optional.of(newUser(it));
+                    System.out.println(newUser(it));
                 }
             }
         } catch (Exception e) {

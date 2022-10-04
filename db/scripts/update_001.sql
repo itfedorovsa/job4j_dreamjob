@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS candidates (
    photo BYTEA
 );
 
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
   id SERIAL PRIMARY KEY,
   name TEXT,
   email TEXT UNIQUE,

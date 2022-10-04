@@ -35,20 +35,23 @@ public class UserController {
     }
 
     @GetMapping("/formAddUser")
-    public String addPost(Model model) {
+    public String addPost(Model model, HttpSession session) {
         model.addAttribute("user", new User(0, "Name", "Email", "Password"));
+        model.addAttribute("user", getUser(session));
         return "addUser";
     }
 
     @GetMapping("/success")
-    public String success(Model model) {
+    public String success(Model model, HttpSession session) {
         model.addAttribute("user", new User(0, "Name", "Email", "Password"));
+        model.addAttribute("user", getUser(session));
         return "success";
     }
 
     @GetMapping("/fail")
-    public String fail(Model model) {
+    public String fail(Model model, HttpSession session) {
         model.addAttribute("user", new User(0, "Name", "Email", "Password"));
+        model.addAttribute("user", getUser(session));
         return "fail";
     }
 
@@ -77,4 +80,12 @@ public class UserController {
         return "redirect:/loginPage";
     }
 
+    private User getUser(HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            user = new User();
+            user.setName("Guest");
+        }
+        return user;
+    }
 }

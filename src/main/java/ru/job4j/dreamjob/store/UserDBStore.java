@@ -38,12 +38,8 @@ public class UserDBStore {
             try (ResultSet id = ps.getGeneratedKeys()) {
                 if (id.next()) {
                     user.setId(id.getInt(1));
+                    rsl = Optional.of(user);
                 }
-            }
-            rsl = Optional.of(user);
-        } catch (PSQLException e) {
-            if (e.getMessage().contains("ERROR: duplicate key value violates unique constraint \"users_email_key\"")) {
-                return rsl;
             }
         } catch (Exception e) {
             LOG.error("Exception in add()", e);

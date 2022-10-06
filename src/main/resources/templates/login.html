@@ -18,12 +18,24 @@
     <title>Dream job!</title>
 </head>
 <body>
-
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Dream job!</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" th:href="@{/formAddUser}">Sign up</a>
+                </a>
+            </div>
+        </div>
+    </nav>
     <div class="container pt-3">
         <div class="row">
             <div class="card" style="width: 100%">
                 <div class="card-header">
-                    Authorization
+                    Log in or register
                 </div>
                 <div class="card-body">
                     <div th:if="${fail}" class="alert alert-danger" role="alert">
@@ -44,6 +56,6 @@
             </div>
         </div>
     </div>
-
+</div>
 </body>
 </html>

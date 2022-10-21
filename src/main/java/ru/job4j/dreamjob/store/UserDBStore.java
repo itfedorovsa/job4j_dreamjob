@@ -51,8 +51,9 @@ public class UserDBStore {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps =  cn.prepareStatement(UPDATE)) {
             ps.setString(1, user.getName());
-            ps.setString(2, user.getPassword());
-            ps.setString(3, user.getEmail());
+            ps.setString(2, user.getEmail());
+            ps.setString(3, user.getPassword());
+
             ps.execute();
         } catch (Exception e) {
             LOG.error("Exception in update()", e);

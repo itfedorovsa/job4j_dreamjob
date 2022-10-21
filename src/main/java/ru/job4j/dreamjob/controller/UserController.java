@@ -26,7 +26,6 @@ public class UserController {
     @PostMapping("/registration")
     public String registration(Model model, @ModelAttribute User user) {
         Optional<User> regUser = userService.add(user);
-        System.out.println(regUser.toString());
         if (regUser.isEmpty()) {
             model.addAttribute("message", "A user with this email already exists");
             return "redirect:/fail";
